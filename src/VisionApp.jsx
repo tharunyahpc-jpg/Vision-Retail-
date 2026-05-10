@@ -44,30 +44,45 @@ const TIERS = [
 ];
 const getTier = (s) => { for (let i=TIERS.length-1;i>=0;i--) if (s>=TIERS[i].threshold) return TIERS[i]; return TIERS[0]; };
 
+/* ──────── ASSETS ──────── */
+const IMG = {
+  hero:       'img/hero_banner.jpg',
+  beauty:     'img/beauty_banner.jpg',
+  summer:     'img/summer_edit.jpg',
+  crafted:    'img/crafted_banner.jpg',
+  membership: 'img/membership_banner.jpg',
+  coat:       'img/coat.jpg',
+  bag:        'img/bag.jpg',
+  bracelet:   'img/bracelet.jpg',
+  trousers:   'img/trousers.jpg',
+  dress:      'img/dress.jpg',
+  perfume:    'img/perfume.jpg',
+};
+
 /* ──────── PRODUCTS ──────── */
 const PRODUCTS = [
   { id:1, name:'Oversized cotton-blend coat', brand:'Vision Studio', price:189, mrp:249, rating:4.7, reviews:2840, sale:false,
-    bg:['#E8E1D6','#D4C9B7','#A89880'],
+    bg:['#E8E1D6','#D4C9B7','#A89880'], image:IMG.coat,
     images:[['#E8E1D6','#D4C9B7','#A89880'],['#D4C9B7','#A89880','#7B6D5A'],['#F0EAE0','#D8CDB9','#A89880'],['#A89880','#7B6D5A','#3E342A']],
     description:'A relaxed cotton-blend coat tailored in our Porto atelier. Drop shoulders, hidden plackets, and corozo buttons. Cut for the long view.',
     materials:'62% cotton · 38% wool · Cupro lining' },
   { id:2, name:'Soft leather crossbody bag', brand:'Maison Verte', price:145, rating:4.5, reviews:1203, sale:false,
-    bg:['#A87E58','#7B5733','#4A341E'],
+    bg:['#A87E58','#7B5733','#4A341E'], image:IMG.bag,
     images:[['#A87E58','#7B5733','#4A341E'],['#C49870','#8B6240','#5A3E22'],['#7B5733','#4A341E','#2A1D10'],['#A87E58','#8B6240','#7B5733']],
     description:'A pared-back crossbody in vegetable-tanned leather. Adjustable strap, magnetic closure, and a single interior pocket.',
     materials:'Full-grain Italian leather · Brass hardware' },
   { id:3, name:'Sculpted gold chain bracelet', brand:'Vision Edit', price:79, mrp:119, rating:4.8, reviews:5621, sale:true,
-    bg:['#F0EDE7','#DDD2BB','#C4A876'],
+    bg:['#F0EDE7','#DDD2BB','#C4A876'], image:IMG.bracelet,
     images:[['#F0EDE7','#DDD2BB','#C4A876'],['#DDD2BB','#C4A876','#9B8048'],['#F5F2EC','#E8DFC4','#C4A876'],['#C4A876','#9B8048','#6B5732']],
     description:'A sculptural chain in 18k gold-plated brass. Hand-finished links, lobster clasp. Designed to layer.',
     materials:'18k gold-plated brass · Hypoallergenic' },
   { id:4, name:'Wide-leg pleated trousers', brand:'Atelier Nord', price:78, rating:4.4, reviews:432, sale:false,
-    bg:['#1F1F1F','#2A2A2A','#0A0A0A'],
+    bg:['#1F1F1F','#2A2A2A','#0A0A0A'], image:IMG.trousers,
     images:[['#1F1F1F','#2A2A2A','#0A0A0A'],['#3A3A3A','#1F1F1F','#0A0A0A'],['#2A2A2A','#0A0A0A','#000000'],['#1F1F1F','#1A1A1A','#0E0E0E']],
     description:'Front-pleated trousers in stretch wool. Hidden side adjusters and a clean drape from waist to hem.',
     materials:'82% wool · 16% polyamide · 2% elastane' },
   { id:5, name:'Linen-blend column dress', brand:'Casa Lumen', price:99, mrp:139, rating:4.6, reviews:988, sale:true,
-    bg:['#E8D5D0','#C9A8A0','#9C7670'],
+    bg:['#E8D5D0','#C9A8A0','#9C7670'], image:IMG.dress,
     images:[['#E8D5D0','#C9A8A0','#9C7670'],['#C9A8A0','#9C7670','#6B504A'],['#F0DDD8','#D6B5AC','#9C7670'],['#9C7670','#6B504A','#3E2E2A']],
     description:'A long-line column dress in midweight linen blend. Square neckline, subtle ruching at the bust, side slits.',
     materials:'68% linen · 32% viscose' },
@@ -77,7 +92,7 @@ const PRODUCTS = [
     description:'A fine-gauge merino crew with ribbed cuffs and hem. Lightweight enough for spring, warm enough for the office.',
     materials:'100% extra-fine merino · Mulesing-free' },
   { id:7, name:'Polarised acetate sunglasses', brand:'Vision Originals', price:95, mrp:140, rating:4.6, reviews:1872, sale:true,
-    bg:['#3A3A38','#1F1F1E','#0A0A0A'],
+    bg:['#3A3A38','#1F1F1E','#0A0A0A'], image:IMG.perfume,
     images:[['#3A3A38','#1F1F1E','#0A0A0A'],['#5A5A56','#2A2A28','#0E0E0C'],['#1F1F1E','#0A0A0A','#000000'],['#3A3A38','#2A2A28','#1F1F1E']],
     description:'Hand-cut Italian acetate frames with category-3 polarised lenses. UV400 protection, riveted hinges.',
     materials:'Italian Mazzucchelli acetate · CR-39 polarised lenses' },
@@ -92,41 +107,41 @@ const PRODUCTS = [
 const COLLECTIONS = {
   'new-season':   { title:'New season',  italic:'reset.',     eyebrow:'SS\u201926 — VOLUME ONE',
     subtitle:'Refined essentials for warmer days. Considered cuts, considered cloth.',
-    hero:['#E8E1D6','#C9B89A'], productIds:[1,3,5,6,8,2] },
+    hero:['#E8E1D6','#C9B89A'], image:IMG.summer, dark:true, productIds:[1,3,5,6,8,2] },
   'vision-studio':{ title:'Vision',      italic:'Studio.',    eyebrow:'MADE TO LAST',
     subtitle:'Heritage pieces from our atelier in Porto. Built for decades, not seasons.',
-    hero:['#1F1F1F','#0A0A0A'], dark:true, productIds:[1,4,8,2] },
+    hero:['#1F1F1F','#0A0A0A'], image:IMG.crafted, dark:true, productIds:[1,4,8,2] },
   'edit-04':      { title:'Tones of',    italic:'spring.',    eyebrow:'EDIT N°04',
     subtitle:'Soft palettes and clean silhouettes for the season ahead.',
-    hero:['#E8D5D0','#B89690'], productIds:[5,1,3,6] },
+    hero:['#E8D5D0','#B89690'], image:IMG.summer, dark:true, productIds:[5,1,3,6] },
   'women':        { title:'Women.',      eyebrow:'DEPARTMENT',
     subtitle:'Refined essentials and conversation pieces. For the wardrobe that lasts beyond the season.',
-    hero:['#E8D5D0','#C9A8A0'], productIds:[1,3,5,6,8] },
+    hero:['#E8D5D0','#C9A8A0'], image:IMG.dress, dark:true, productIds:[1,3,5,6,8] },
   'men':          { title:'Men.',        eyebrow:'DEPARTMENT',
     subtitle:'Quietly considered, made to wear well. Tailoring, knits and outerwear from our atelier.',
-    hero:['#1F1F1F','#0A0A0A'], dark:true, productIds:[4,8,7,1,2] },
+    hero:['#1F1F1F','#0A0A0A'], image:IMG.crafted, dark:true, productIds:[4,8,7,1,2] },
   'studio':       { title:'Studio.',     eyebrow:'IN-HOUSE',
     subtitle:'The Vision atelier. In-house cut, in-house sewn, made in Porto.',
-    hero:['#3A3530','#5C4A30'], dark:true, productIds:[1,4,8] },
+    hero:['#3A3530','#5C4A30'], image:IMG.crafted, dark:true, productIds:[1,4,8] },
   'beauty':       { title:'Beauty.',     eyebrow:'A SMALL EDIT',
     subtitle:'Skin, scent and ritual. Considered for the everyday.',
-    hero:['#F0EDE7','#DDD6C7'], productIds:[3,7] },
+    hero:['#F0EDE7','#DDD6C7'], image:IMG.beauty, dark:true, productIds:[3,7] },
   'sale':         { title:'The sale.',   eyebrow:'MEMBERS\u2019 DAYS',
     subtitle:'Up to 50% off the season. Three days only.',
-    hero:['#7F1D1D','#B91C1C'], dark:true, productIds:[3,5,7,1] },
+    hero:['#7F1D1D','#B91C1C'], image:IMG.membership, dark:true, productIds:[3,5,7,1] },
 };
 
 const HEROES = [
-  { eyebrow:'NEW SEASON',    title:'Quietly',    italic:'bold.',    cta:'Shop the edit',  slug:'new-season',    bg:['#E8E1D6','#C9B89A'] },
-  { eyebrow:'VISION STUDIO', title:'Made',       italic:'to last.', cta:'Discover',        slug:'vision-studio', bg:['#1F1F1F','#0A0A0A'], dark:true },
-  { eyebrow:'EDIT N°04',     title:'Tones of',   italic:'spring.',  cta:'Read the story',  slug:'__story',       bg:['#E8D5D0','#B89690'] },
+  { eyebrow:'NEW SEASON',    title:'Quietly',    italic:'bold.',    cta:'Shop the edit',  slug:'new-season',    bg:['#E8E1D6','#C9B89A'], image:IMG.hero,    dark:true },
+  { eyebrow:'VISION STUDIO', title:'Made',       italic:'to last.', cta:'Discover',        slug:'vision-studio', bg:['#1F1F1F','#0A0A0A'], image:IMG.crafted, dark:true },
+  { eyebrow:'EDIT N°04',     title:'Tones of',   italic:'spring.',  cta:'Read the story',  slug:'__story',       bg:['#E8D5D0','#B89690'], image:IMG.summer,  dark:true },
 ];
 
 const CATEGORIES_GRID = [
-  { name:'Women',  slug:'women',  bg:['#E8D5D0','#C9A8A0'], dark:false },
-  { name:'Men',    slug:'men',    bg:['#1F1F1F','#0A0A0A'], dark:true  },
-  { name:'Studio', slug:'studio', bg:['#3A3530','#5C4A30'], dark:true  },
-  { name:'Beauty', slug:'beauty', bg:['#F0EDE7','#DDD6C7'], dark:false },
+  { name:'Women',  slug:'women',  bg:['#E8D5D0','#C9A8A0'], image:IMG.dress,    dark:true },
+  { name:'Men',    slug:'men',    bg:['#1F1F1F','#0A0A0A'], image:IMG.crafted,  dark:true },
+  { name:'Studio', slug:'studio', bg:['#3A3530','#5C4A30'], image:IMG.summer,   dark:true },
+  { name:'Beauty', slug:'beauty', bg:['#F0EDE7','#DDD6C7'], image:IMG.beauty,   dark:true },
 ];
 
 /* ──────── THEMES ──────── */
@@ -148,20 +163,29 @@ const Eyebrow = ({ children, t, color, size }) => (
   <span style={{ ...(size===8?T.eyebrowS:T.eyebrow), color:color||t.textDim, fontFamily:'Inter,sans-serif', display:'inline-block' }}>{children}</span>
 );
 
-const ProductImage = ({ p, t, fill, showSale=true, gradient }) => {
+const ProductImage = ({ p, t, fill, showSale=true, gradient, src }) => {
   const g = gradient || p.bg;
+  const photo = src || p.image;
   return (
     <div style={{
       width:'100%', height:fill?'100%':undefined, aspectRatio:fill?undefined:'3/4',
       background:`linear-gradient(165deg, ${g[0]} 0%, ${g[1]} 50%, ${g[2]||g[1]} 100%)`,
       position:'relative', overflow:'hidden', borderRadius:fill?0:r.md,
     }}>
+      {photo && (
+        <img
+          src={photo}
+          alt={p.name || ''}
+          loading="lazy"
+          style={{ position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'cover', display:'block' }}
+        />
+      )}
       <div style={{ position:'absolute', inset:0,
         background:'radial-gradient(ellipse 60% 45% at 50% 25%, rgba(255,255,255,0.18) 0%, transparent 55%)' }}/>
       <div style={{ position:'absolute', inset:0, opacity:0.04, mixBlendMode:'overlay',
         backgroundImage:'radial-gradient(rgba(255,255,255,0.5) 0.5px, transparent 0.5px)', backgroundSize:'3px 3px' }}/>
       {p.sale && showSale && (
-        <div style={{ position:'absolute', top:10, right:10, ...T.eyebrowS, color:'#fff', background:t.primary, padding:'4px 8px', borderRadius:r.sm }}>SALE</div>
+        <div style={{ position:'absolute', top:10, right:10, ...T.eyebrowS, color:'#fff', background:t.primary, padding:'4px 8px', borderRadius:r.sm, zIndex:1 }}>SALE</div>
       )}
     </div>
   );
@@ -230,7 +254,7 @@ const ImageCarousel = ({ p, t }) => {
       }}>
         {p.images.map((g, i) => (
           <div key={i} style={{ minWidth:'100%', height:'100%', scrollSnapAlign:'center' }}>
-            <ProductImage p={p} t={t} fill showSale={i===0} gradient={g}/>
+            <ProductImage p={p} t={t} fill showSale={i===0} gradient={g} src={i===0?p.image:undefined}/>
           </div>
         ))}
       </div>
@@ -667,6 +691,15 @@ const HomeScreen = ({ t, go, toggleWish, wishlist, cartCount, openDrawer, tier, 
 
       <div style={{ height:480, position:'relative', overflow:'hidden',
         background:`linear-gradient(170deg, ${hero.bg[0]} 0%, ${hero.bg[1]} 100%)` }}>
+        {hero.image && (
+          <img src={hero.image} alt={hero.eyebrow} style={{
+            position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'cover', display:'block',
+          }}/>
+        )}
+        {hero.image && (
+          <div style={{ position:'absolute', inset:0,
+            background:'linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.55) 100%)' }}/>
+        )}
         <div style={{ position:'absolute', inset:0,
           background:'radial-gradient(ellipse 80% 50% at 60% 30%, rgba(255,255,255,0.18) 0%, transparent 60%)' }}/>
         <div style={{ position:'absolute', inset:0, opacity:0.05, mixBlendMode:'overlay',
@@ -727,6 +760,15 @@ const HomeScreen = ({ t, go, toggleWish, wishlist, cartCount, openDrawer, tier, 
               background:`linear-gradient(165deg, ${c.bg[0]} 0%, ${c.bg[1]} 100%)`,
               border:'none', padding:0, fontFamily:'inherit', textAlign:'left', borderRadius:r.md,
             }}>
+              {c.image && (
+                <img src={c.image} alt={c.name} style={{
+                  position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'cover', display:'block',
+                }}/>
+              )}
+              {c.image && (
+                <div style={{ position:'absolute', inset:0,
+                  background:'linear-gradient(180deg, rgba(0,0,0,0) 35%, rgba(0,0,0,0.55) 100%)' }}/>
+              )}
               <div style={{ position:'absolute', inset:0,
                 background:'radial-gradient(ellipse 70% 50% at 50% 30%, rgba(255,255,255,0.15) 0%, transparent 60%)' }}/>
               <div style={{ position:'absolute', bottom:0, left:0, right:0, padding:16, color: c.dark?'#F1ECDF':'#1A1815' }}>
@@ -788,6 +830,11 @@ const HomeScreen = ({ t, go, toggleWish, wishlist, cartCount, openDrawer, tier, 
           height:380, position:'relative', overflow:'hidden', cursor:'pointer', borderRadius:r.lg,
           background:'linear-gradient(180deg, #4A0E0E 0%, #7F1D1D 30%, #B91C1C 60%, #5A0F0F 100%)',
         }}>
+          <img src={IMG.membership} alt="Members' Days" style={{
+            position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'cover', display:'block', opacity:0.7,
+          }}/>
+          <div style={{ position:'absolute', inset:0,
+            background:'linear-gradient(180deg, rgba(127,29,29,0.55) 0%, rgba(74,14,14,0.85) 100%)' }}/>
           <div style={{ position:'absolute', inset:14, border:'1px solid rgba(252,165,165,0.28)', borderRadius:r.md, pointerEvents:'none' }}/>
           <div style={{ position:'absolute', inset:0,
             background:'radial-gradient(ellipse 70% 50% at 50% 35%, rgba(252,165,165,0.18) 0%, transparent 60%)' }}/>
@@ -886,6 +933,15 @@ const CategoryScreen = ({ t, go, slug, toggleWish, wishlist }) => {
       <div style={{ flex:1, overflowY:'auto', WebkitOverflowScrolling:'touch', overscrollBehavior:'contain', minHeight:0, paddingBottom:30 }}>
         <div style={{ height:300, position:'relative', overflow:'hidden',
           background:`linear-gradient(170deg, ${c.hero[0]} 0%, ${c.hero[1]} 100%)` }}>
+          {c.image && (
+            <img src={c.image} alt={c.title} style={{
+              position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'cover', display:'block',
+            }}/>
+          )}
+          {c.image && (
+            <div style={{ position:'absolute', inset:0,
+              background:'linear-gradient(180deg, rgba(0,0,0,0) 30%, rgba(0,0,0,0.55) 100%)' }}/>
+          )}
           <div style={{ position:'absolute', inset:0,
             background:'radial-gradient(ellipse 70% 50% at 50% 35%, rgba(255,255,255,0.16) 0%, transparent 60%)' }}/>
           <div style={{ position:'absolute', inset:0, opacity:0.05, mixBlendMode:'overlay',

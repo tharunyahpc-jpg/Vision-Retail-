@@ -1,0 +1,8 @@
+{
+  "appId": "com.vision.retail",
+  "appName": "Vision",
+  "webDir": "dist",
+  "android": {
+    "allowMixedContent": false
+  }
+}
