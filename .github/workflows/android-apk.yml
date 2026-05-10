@@ -28,16 +28,10 @@ jobs:
           node-version: "22"
           cache: npm
 
-      - name: Set up Android SDK (35 + build-tools 35.0.0)
+      - name: Set up Android SDK (36 + build-tools 36.0.0)
         uses: android-actions/setup-android@v3
         with:
-          packages: "platforms;android-35 build-tools;35.0.0 platform-tools"
-
-      - name: Pin Android target SDK to 35
-        run: |
-          sed -i 's/compileSdkVersion = 36/compileSdkVersion = 35/' android/variables.gradle
-          sed -i 's/targetSdkVersion = 36/targetSdkVersion = 35/'   android/variables.gradle
-          cat android/variables.gradle
+          packages: "platforms;android-36 build-tools;36.0.0 platform-tools"
 
       - name: Install dependencies
         run: npm ci
