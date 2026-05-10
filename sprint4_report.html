@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sprint 4 Report — Resulticks Edge Solution</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#0F172A;background:#F8FAFC;padding:32px;line-height:1.5;font-size:14px}
+  .page{max-width:920px;margin:0 auto;background:#fff;padding:40px 48px;border:1px solid #E2E8F0;border-radius:8px}
+  h1{font-size:24px;font-weight:700;margin-bottom:4px}
+  h2{font-size:15px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#475569;margin:28px 0 12px;padding-bottom:6px;border-bottom:2px solid #E2E8F0}
+  .sub{color:#64748B;font-size:13px;margin-bottom:8px}
+  .meta{display:flex;gap:24px;flex-wrap:wrap;color:#475569;font-size:12px;margin-top:8px;padding:10px 14px;background:#F1F5F9;border-radius:6px}
+  .meta b{color:#0F172A}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0}
+  .kpi{padding:14px 16px;border:1px solid #E2E8F0;border-radius:6px;border-left:4px solid #3B82F6}
+  .kpi.green{border-left-color:#10B981}
+  .kpi.amber{border-left-color:#F59E0B}
+  .kpi.red{border-left-color:#EF4444}
+  .kpi .lbl{font-size:11px;color:#64748B;text-transform:uppercase;letter-spacing:.4px;font-weight:600}
+  .kpi .val{font-size:28px;font-weight:700;line-height:1.1;margin-top:4px}
+  .kpi .note{font-size:11px;color:#64748B;margin-top:2px}
+  table{width:100%;border-collapse:collapse;margin-top:8px;font-size:13px}
+  th{background:#F1F5F9;text-align:left;padding:8px 10px;font-size:11px;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.4px;border-bottom:1px solid #E2E8F0}
+  td{padding:7px 10px;border-bottom:1px solid #F1F5F9}
+  td.tc,th.tc{text-align:center}
+  tr:last-child td{border-bottom:none}
+  .pill{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600}
+  .p-ok{background:#D1FAE5;color:#059669}
+  .p-warn{background:#FEF3C7;color:#B45309}
+  .p-crit{background:#FEE2E2;color:#B91C1C}
+  .callout{background:#FEF3C7;border-left:4px solid #F59E0B;padding:12px 16px;border-radius:4px;margin:12px 0;font-size:13px;color:#78350F}
+  .callout b{color:#451A03}
+  .footer{margin-top:32px;padding-top:16px;border-top:1px solid #E2E8F0;font-size:11px;color:#64748B;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  ul.clean{list-style:none;font-size:13px}
+  ul.clean li{padding:4px 0;color:#475569}
+  ul.clean li b{color:#0F172A}
+  @media print{body{padding:0;background:#fff}.page{border:none;padding:24px}}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <h1>Sprint 4 — Executive Report</h1>
+  <p class="sub">Resulticks Edge Solution · Release 5.0.8</p>
+  <div class="meta">
+    <span><b>Sprint window:</b> 15 March → 15 April 2026</span>
+    <span><b>Extended:</b> till 8 May 2026 (bug-fix window)</span>
+    <span><b>Report date:</b> 10 May 2026</span>
+  </div>
+
+  <h2>Headline Numbers</h2>
+  <div class="kpis">
+    <div class="kpi"><div class="lbl">Tasks taken</div><div class="val">71</div><div class="note">Stories committed at sprint start</div></div>
+    <div class="kpi amber"><div class="lbl">Moved to Sprint 5</div><div class="val">21</div><div class="note">Re-planned in Week 4 (mutual agreement)</div></div>
+    <div class="kpi green"><div class="lbl">In scope</div><div class="val">50</div><div class="note">Worked on through extended window</div></div>
+    <div class="kpi green"><div class="lbl">Completed</div><div class="val">17</div><div class="note">Done · Deployed to RUN</div></div>
+  </div>
+
+  <div class="callout">
+    <b>Why 21 moved:</b> At the end of Week 4, 21 stories could not be finished within the planned cycle. With mutual agreement between PM, Scrum Master and team leads, these were re-planned into Sprint 5 to protect quality on the remaining 50.
+  </div>
+
+  <h2>Story Status (50 in scope)</h2>
+  <table>
+    <thead><tr><th>Status</th><th class="tc">Count</th><th class="tc">Share</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td><span class="pill p-ok">Done / Deployed</span></td><td class="tc"><b>17</b></td><td class="tc">34%</td><td>Released to RUN environment</td></tr>
+      <tr><td><span class="pill" style="background:#EDE9FE;color:#6D28D9">In QA</span></td><td class="tc"><b>18</b></td><td class="tc">36%</td><td>Validated / deployed to QA env</td></tr>
+      <tr><td><span class="pill p-warn">In Progress</span></td><td class="tc"><b>15</b></td><td class="tc">30%</td><td>Active development</td></tr>
+      <tr><td><b>Total</b></td><td class="tc"><b>50</b></td><td class="tc">100%</td><td></td></tr>
+    </tbody>
+  </table>
+
+  <h2>Bugs (separate from the 71)</h2>
+  <div class="kpis" style="grid-template-columns:repeat(3,1fr)">
+    <div class="kpi"><div class="lbl">Total bugs</div><div class="val">222</div><div class="note">Logged this sprint</div></div>
+    <div class="kpi amber"><div class="lbl">Reopened</div><div class="val">39</div><div class="note">Returned after first fix</div></div>
+    <div class="kpi green"><div class="lbl">Live in RUN</div><div class="val">17</div><div class="note">Reached production</div></div>
+  </div>
+
+  <h2>Team Performance — 26 Developers</h2>
+  <p class="sub">Story completion by developer (sorted by completion rate)</p>
+  <table>
+    <thead><tr><th>Developer</th><th class="tc">Assigned</th><th class="tc">Done</th><th class="tc">In QA</th><th class="tc">In Progress</th><th class="tc">Completion</th><th class="tc">Status</th></tr></thead>
+    <tbody>
+      <tr><td>Jeevankumar</td><td class="tc">2</td><td class="tc">2</td><td class="tc">0</td><td class="tc">0</td><td class="tc"><b>100%</b></td><td class="tc"><span class="pill p-ok">On Track</span></td></tr>
+      <tr><td>Akash S</td><td class="tc">1</td><td class="tc">1</td><td class="tc">0</td><td class="tc">0</td><td class="tc"><b>100%</b></td><td class="tc"><span class="pill p-ok">On Track</span></td></tr>
+      <tr><td>Dinesh</td><td class="tc">1</td><td class="tc">1</td><td class="tc">0</td><td class="tc">0</td><td class="tc"><b>100%</b></td><td class="tc"><span class="pill p-ok">On Track</span></td></tr>
+      <tr><td>Kumaran Ganesan</td><td class="tc">1</td><td class="tc">1</td><td class="tc">0</td><td class="tc">0</td><td class="tc"><b>100%</b></td><td class="tc"><span class="pill p-ok">On Track</span></td></tr>
+      <tr><td>Vijay M</td><td class="tc">1</td><td class="tc">1</td><td class="tc">0</td><td class="tc">0</td><td class="tc"><b>100%</b></td><td class="tc"><span class="pill p-ok">On Track</span></td></tr>
+      <tr><td>Yogeshwaran T</td><td class="tc">1</td><td class="tc">1</td><td class="tc">0</td><td class="tc">0</td><td class="tc"><b>100%</b></td><td class="tc"><span class="pill p-ok">On Track</span></td></tr>
+      <tr><td>Shafeeq</td><td class="tc">5</td><td class="tc">3</td><td class="tc">2</td><td class="tc">0</td><td class="tc"><b>60%</b></td><td class="tc"><span class="pill p-ok">On Track</span></td></tr>
+      <tr><td>Beaulet Godlin</td><td class="tc">2</td><td class="tc">1</td><td class="tc">0</td><td class="tc">1</td><td class="tc"><b>50%</b></td><td class="tc"><span class="pill p-ok">On Track</span></td></tr>
+      <tr><td>Harish Ravikumar</td><td class="tc">2</td><td class="tc">1</td><td class="tc">1</td><td class="tc">0</td><td class="tc"><b>50%</b></td><td class="tc"><span class="pill p-ok">On Track</span></td></tr>
+      <tr><td>Rahul M</td><td class="tc">2</td><td class="tc">1</td><td class="tc">1</td><td class="tc">0</td><td class="tc"><b>50%</b></td><td class="tc"><span class="pill p-ok">On Track</span></td></tr>
+      <tr><td>Stanley A L</td><td class="tc">2</td><td class="tc">1</td><td class="tc">1</td><td class="tc">0</td><td class="tc"><b>50%</b></td><td class="tc"><span class="pill p-ok">On Track</span></td></tr>
+      <tr><td>Saideep CH</td><td class="tc">5</td><td class="tc">2</td><td class="tc">3</td><td class="tc">0</td><td class="tc"><b>40%</b></td><td class="tc"><span class="pill p-warn">At Risk</span></td></tr>
+      <tr><td>Raghav</td><td class="tc">3</td><td class="tc">1</td><td class="tc">0</td><td class="tc">2</td><td class="tc"><b>33%</b></td><td class="tc"><span class="pill p-warn">At Risk</span></td></tr>
+      <tr><td>Narender Sundar</td><td class="tc">3</td><td class="tc">0</td><td class="tc">2</td><td class="tc">1</td><td class="tc"><b>0%</b></td><td class="tc"><span class="pill p-crit">Critical</span></td></tr>
+      <tr><td>Ziyaudeen Abbas</td><td class="tc">3</td><td class="tc">0</td><td class="tc">0</td><td class="tc">3</td><td class="tc"><b>0%</b></td><td class="tc"><span class="pill p-crit">Critical</span></td></tr>
+      <tr><td>Praveen Kumar</td><td class="tc">2</td><td class="tc">0</td><td class="tc">2</td><td class="tc">0</td><td class="tc"><b>0%</b></td><td class="tc"><span class="pill p-crit">Critical</span></td></tr>
+      <tr><td>Rahul Srivastav L</td><td class="tc">2</td><td class="tc">0</td><td class="tc">2</td><td class="tc">0</td><td class="tc"><b>0%</b></td><td class="tc"><span class="pill p-crit">Critical</span></td></tr>
+      <tr><td>Sathiswaran M</td><td class="tc">2</td><td class="tc">0</td><td class="tc">1</td><td class="tc">1</td><td class="tc"><b>0%</b></td><td class="tc"><span class="pill p-crit">Critical</span></td></tr>
+      <tr><td>Shamir</td><td class="tc">2</td><td class="tc">0</td><td class="tc">0</td><td class="tc">2</td><td class="tc"><b>0%</b></td><td class="tc"><span class="pill p-crit">Critical</span></td></tr>
+      <tr><td>Syed Taleb Peer T</td><td class="tc">2</td><td class="tc">0</td><td class="tc">2</td><td class="tc">0</td><td class="tc"><b>0%</b></td><td class="tc"><span class="pill p-crit">Critical</span></td></tr>
+      <tr><td>Akash M</td><td class="tc">1</td><td class="tc">0</td><td class="tc">0</td><td class="tc">1</td><td class="tc"><b>0%</b></td><td class="tc"><span class="pill p-crit">Critical</span></td></tr>
+      <tr><td>Divyaprasanth B</td><td class="tc">1</td><td class="tc">0</td><td class="tc">1</td><td class="tc">0</td><td class="tc"><b>0%</b></td><td class="tc"><span class="pill p-crit">Critical</span></td></tr>
+      <tr><td>Karthick Venkatesan</td><td class="tc">1</td><td class="tc">0</td><td class="tc">0</td><td class="tc">1</td><td class="tc"><b>0%</b></td><td class="tc"><span class="pill p-crit">Critical</span></td></tr>
+      <tr><td>Kasarapu Thirupathi</td><td class="tc">1</td><td class="tc">0</td><td class="tc">0</td><td class="tc">1</td><td class="tc"><b>0%</b></td><td class="tc"><span class="pill p-crit">Critical</span></td></tr>
+      <tr><td>Noorul Riyaz</td><td class="tc">1</td><td class="tc">0</td><td class="tc">0</td><td class="tc">1</td><td class="tc"><b>0%</b></td><td class="tc"><span class="pill p-crit">Critical</span></td></tr>
+      <tr><td>Vennila Marimuthu</td><td class="tc">1</td><td class="tc">0</td><td class="tc">0</td><td class="tc">1</td><td class="tc"><b>0%</b></td><td class="tc"><span class="pill p-crit">Critical</span></td></tr>
+      <tr style="background:#F8FAFC;font-weight:700"><td><b>Total</b></td><td class="tc"><b>50</b></td><td class="tc"><b>17</b></td><td class="tc"><b>18</b></td><td class="tc"><b>15</b></td><td class="tc"><b>34%</b></td><td class="tc"></td></tr>
+    </tbody>
+  </table>
+
+  <h2>Key Observations</h2>
+  <div class="two-col">
+    <div>
+      <ul class="clean">
+        <li><b>Completion rate:</b> 34% on the 50-story scope (17 / 50 fully Done).</li>
+        <li><b>QA pipeline:</b> 18 stories validated/queued in QA — should land early Sprint 5.</li>
+        <li><b>Carryover:</b> 21 stories formally moved to Sprint 5 by mutual agreement at Week 4.</li>
+        <li><b>Bug load:</b> 222 bugs logged, 39 reopened — driver for the May 8 extension.</li>
+      </ul>
+    </div>
+    <div>
+      <ul class="clean">
+        <li><b>On Track:</b> 11 developers</li>
+        <li><b>At Risk:</b> 2 developers (Saideep CH, Raghav)</li>
+        <li><b>Critical:</b> 13 developers at 0% completion — most have work in QA or In Progress</li>
+        <li><b>Avg stories / dev:</b> 0.7 (benchmark 3–5) — suggests scope-per-dev was conservative</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>Scrum Master: <b>Kumaran Ganesan</b> · Project Manager: <b>Karthick Venkatesan</b> · PMO Head: <b>Balaji Sankaran Saravanan V</b></span>
+    <span>Generated 10 May 2026</span>
+  </div>
+
+</div>
+</body>
+</html>
