@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Resul · Release Calendar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./css/styles.css" />
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <div class="mark">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
+    </div>
+    <div>
+      <h1>Resul <b>·</b> Release Calendar</h1>
+      <p>Releases · Sprints · Leaves</p>
+    </div>
+  </div>
+
+  <div class="spacer"></div>
+
+  <div class="bar-actions">
+    <div class="pills" id="pills">
+      <button class="pill" data-filter="release" aria-pressed="true"><span class="swatch" style="background:var(--release)"></span>Releases <span class="count" id="c-release">0</span></button>
+      <button class="pill" data-filter="sprint" aria-pressed="true"><span class="swatch" style="background:var(--sprint)"></span>Sprints <span class="count" id="c-sprint">0</span></button>
+      <button class="pill" data-filter="leave" aria-pressed="true"><span class="swatch" style="background:var(--leave)"></span>Leaves <span class="count" id="c-leave">0</span></button>
+    </div>
+    <button class="btn" id="btn-export">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+      <span class="label-txt">Export</span>
+    </button>
+    <button class="btn" id="btn-import">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5-5 5 5"/><path d="M12 5v12"/></svg>
+      <span class="label-txt">Import</span>
+    </button>
+    <input type="file" id="file-import" accept="application/json,.json" hidden />
+    <button class="btn btn-primary" id="btn-add">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+      Add entry
+    </button>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="toolbar">
+    <div class="monthnav">
+      <button id="prev" aria-label="Previous month"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <span class="label" id="monthlabel">May 2026</span>
+      <button id="next" aria-label="Next month"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+    </div>
+    <button class="btn today-btn" id="btn-today">Today</button>
+
+    <div class="spacer"></div>
+
+    <div class="legend">
+      <span><i style="background:var(--release)"></i>Release</span>
+      <span><i style="background:var(--sprint)"></i>Sprint</span>
+      <span><i style="background:var(--leave)"></i>Leave</span>
+    </div>
+
+    <div class="seg" id="viewseg">
+      <button data-view="month" aria-pressed="true">Month</button>
+      <button data-view="list" aria-pressed="false">List</button>
+    </div>
+  </div>
+
+  <section id="view-root"></section>
+</main>
+
+<!-- ===================== MODAL ===================== -->
+<div class="scrim" id="scrim">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="m-title">
+    <div class="mhead">
+      <div class="micon" id="m-icon"></div>
+      <div>
+        <h2 id="m-title">Add entry</h2>
+        <p>Schedule a release, sprint, or leave</p>
+      </div>
+      <button class="mclose" id="m-close" aria-label="Close"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    </div>
+
+    <div class="tabs" id="tabs" role="tablist">
+      <button role="tab" data-tab="release" aria-selected="true"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="m3.3 7 8.7 5 8.7-5M12 22V12"/></svg>Release</button>
+      <button role="tab" data-tab="sprint" aria-selected="false"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>Sprint</button>
+      <button role="tab" data-tab="leave" aria-selected="false"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12v8a2 2 0 0 0 4 0"/><path d="M2 12a10 10 0 0 1 20 0z"/></svg>Leave</button>
+    </div>
+
+    <!-- RELEASE -->
+    <div class="fields active" data-fields="release">
+      <div class="row">
+        <div class="field"><label class="lbl">Functionality name</label><input class="inp" id="r-name" placeholder="e.g. User Authentication" /></div>
+        <div class="field"><label class="lbl">Version</label><input class="inp" id="r-version" placeholder="e.g. v2.1.0" /></div>
+      </div>
+      <div class="field" style="margin-bottom:11px"><label class="lbl">Release date</label><input class="inp" type="date" id="r-date" /></div>
+      <div class="field" style="margin-bottom:11px"><label class="lbl">Module / area</label><input class="inp" id="r-module" placeholder="e.g. Dashboard, API, Mobile" /></div>
+      <div class="field" style="margin-bottom:11px"><label class="lbl">Release manager</label><input class="inp" id="r-manager" placeholder="e.g. Rahul Kumar" /></div>
+      <div class="field" style="margin-bottom:14px"><label class="lbl">Release notes</label><textarea class="inp" id="r-notes" placeholder="What's in this release?"></textarea></div>
+      <div class="field"><label class="lbl">Color</label><div class="swatches" data-swatches="release"></div></div>
+    </div>
+
+    <!-- SPRINT -->
+    <div class="fields" data-fields="sprint">
+      <div class="row">
+        <div class="field"><label class="lbl">Sprint name</label><input class="inp" id="s-name" placeholder="e.g. Sprint 5" /></div>
+        <div class="field"><label class="lbl">Goal</label><input class="inp" id="s-goal" placeholder="e.g. Auth module" /></div>
+      </div>
+      <div class="row">
+        <div class="field"><label class="lbl">Start date</label><input class="inp" type="date" id="s-start" /></div>
+        <div class="field"><label class="lbl">End date</label><input class="inp" type="date" id="s-end" /></div>
+      </div>
+      <div class="field" style="margin-bottom:14px"><label class="lbl">Team / notes</label><input class="inp" id="s-team" placeholder="e.g. Backend team" /></div>
+      <div class="field"><label class="lbl">Color</label><div class="swatches" data-swatches="sprint"></div></div>
+    </div>
+
+    <!-- LEAVE -->
+    <div class="fields" data-fields="leave">
+      <div class="row">
+        <div class="field"><label class="lbl">Developer name</label><input class="inp" id="l-name" placeholder="e.g. Rahul Kumar" /></div>
+        <div class="field"><label class="lbl">Leave type</label>
+          <select class="inp" id="l-type">
+            <option>Planned Leave</option><option>Sick Leave</option><option>Work From Home</option><option>Comp Off</option><option>Casual Leave</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="field"><label class="lbl">From date</label><input class="inp" type="date" id="l-from" /></div>
+        <div class="field"><label class="lbl">To date</label><input class="inp" type="date" id="l-to" /></div>
+      </div>
+      <div class="field" style="margin-bottom:14px"><label class="lbl">Duration</label>
+        <div class="durs" id="durs">
+          <button class="dur" data-dur="full" aria-checked="true"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M5 5l1.4 1.4M17.6 17.6 19 19M2 12h2M20 12h2M5 19l1.4-1.4M17.6 6.4 19 5"/></svg><span>Full Day</span></button>
+          <button class="dur" data-dur="first" aria-checked="false"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 18a5 5 0 0 0-10 0"/><path d="M12 9V2M5.6 11.6 4.2 10.2M19.8 10.2l-1.4 1.4M2 18h2M20 18h2M22 22H2"/><path d="m8 6 4-4 4 4"/></svg><span>First Half</span></button>
+          <button class="dur" data-dur="second" aria-checked="false"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 18a5 5 0 0 0-10 0"/><path d="M12 2v7M5.6 11.6 4.2 10.2M19.8 10.2l-1.4 1.4M2 18h2M20 18h2M22 22H2"/><path d="m16 5-4 4-4-4"/></svg><span>Second Half</span></button>
+        </div>
+      </div>
+      <div class="field"><label class="lbl">Notes / reason</label><input class="inp" id="l-notes" placeholder="Optional reason" /></div>
+    </div>
+
+    <div class="mfoot">
+      <button class="btn btn-danger" id="m-delete" style="display:none">Delete</button>
+      <div class="grow"></div>
+      <button class="btn" id="m-cancel">Cancel</button>
+      <button class="btn btn-primary" id="m-save">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg>
+        Save
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"><span class="tdot"></span><span id="toast-msg">Saved</span></div>
+
+<script type="module" src="./js/main.js"></script>
+</body>
+</html>
