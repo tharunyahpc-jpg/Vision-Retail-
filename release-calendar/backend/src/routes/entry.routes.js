@@ -1,0 +1,20 @@
+// ============================================================================
+// Route layer — maps the REST contract to controller handlers.
+//   GET    /entries        -> list
+//   GET    /entries/:id    -> getOne
+//   POST   /entries        -> create
+//   PUT    /entries/:id    -> update
+//   DELETE /entries/:id    -> remove
+// ============================================================================
+import { Router } from 'express';
+import * as controller from '../controllers/entry.controller.js';
+
+const router = Router();
+
+router.get('/', controller.list);
+router.get('/:id', controller.getOne);
+router.post('/', controller.create);
+router.put('/:id', controller.update);
+router.delete('/:id', controller.remove);
+
+export default router;
